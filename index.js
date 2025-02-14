@@ -1,97 +1,108 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const morgan = require('morgan')
 
-let notes = [
-  {
-    id: 1,
-    content: "HTML is easy",
-    important: true
+
+let persons = [
+  { 
+    "id": 1,
+    "name": "Arto Hellas", 
+    "number": "040-123456"
   },
-  {
-    id: 2,
-    content: "Browser can execute only JavaScript",
-    important: false
+  { 
+    "id": 2,
+    "name": "Ada Lovelace", 
+    "number": "39-44-5323523"
   },
-  {
-    id: 3,
-    content: "GET and POST are the most important methods of HTTP protocol",
-    important: true
+  { 
+    "id": 3,
+    "name": "Dan Abramov", 
+    "number": "12-43-234345"
+  },
+  { 
+    "id": 4,
+    "name": "Mary Poppendieck", 
+    "number": "39-23-6423122"
   }
 ]
 
-const requestLogger = (request, response, next) => {
-  console.log('Method:', request.method)
-  console.log('Path:  ', request.path)
-  console.log('Body:  ', request.body)
-  console.log('---')
-  next()
-}
-
 app.use(cors())
 
-app.use(express.json())
-app.use(requestLogger)
-
-app.get('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const note = notes.find(note => note.id === id)
-  
-
-  if (note) {
-    response.json(note)
-  } else {
-    response.status(404).end()
-  }
+morgan.token('type', function (request, response, next) {
+  return JSON.stringify(request.body)
 })
 
+app.use(morgan('tiny'))
+app.use(morgan(':type'))
+app.use(express.json())
+
+
 const generateId = () => {
-  const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => n.id))
+  const maxId = persons.length > 0
+    ? Math.floor(Math.random() * persons.length)
     : 0
   return maxId + 1
 }
 
-app.post('/api/notes', (request, response) => {
+// Create a new person
+app.post('/api/persons', (request, response) => {
   const body = request.body
 
-  if (!body.content) {
+  if (!body.name || !body.number) {
     return response.status(400).json({ 
-      error: 'content missing' 
+      error: 'name or number missing' 
     })
   }
 
-  const note = {
-    content: body.content,
-    important: Boolean(body.important) || false,
+  if (persons.find(person => person.name === body.name)) {
+    return response.status(400).json({ 
+      error: 'name must be unique' 
+    })
+  }
+
+  const person = {
+    name: body.name,
+    number: body.number,
     id: generateId()
   }
 
-  notes = notes.concat(note)
+  persons = persons.concat(person)
 
-  response.json(note)
+  response.json(person)
 })
 
-app.delete('/api/notes/:id', (request, response) => {
+// Delete a person
+app.delete('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
-  notes = notes.filter(note => note.id !== id)
+  persons = persons.filter(person => person.id!== id)
 
   response.status(204).end()
 })
 
-app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
+// Get one person from its id
+app.get('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const person = persons.find(person => person.id === id)
+    
+  
+    if (person) {
+      response.json(person)
+    } else {
+      response.status(404).end()
+    }
+  })
+
+// Get for all persons
+app.get('/api/persons', (request, response) => {
+    response.json(persons)
 })
 
-app.get('/api/notes', (request, response) => {
-  response.json(notes)
+const time = new Date()
+
+app.get('/info', (request, response) => {
+    response.send(`<p>Phonebook has info for ${persons.length} people</p><br/><p>${time}</p>`)
 })
-
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
-
-app.use(unknownEndpoint)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
