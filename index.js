@@ -33,6 +33,7 @@ morgan.token('type', function (request, response, next) {
   return JSON.stringify(request.body)
 })
 
+app.use(express.static('dist'))
 app.use(morgan('tiny'))
 app.use(morgan(':type'))
 app.use(express.json())
