@@ -1,7 +1,7 @@
-POST http://localhost:3001/api/persons
+POST https://testdeployment-yodj.onrender.com/api/persons
 Content-Type: application/json
 
 {
-    "name": "ZuzanniTA KK",
-    "number": "695985"
+    "name": "carlosczkk",
+    "number": "322-23231234"
 }

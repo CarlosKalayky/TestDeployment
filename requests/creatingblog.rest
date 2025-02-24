@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+    "title": "our history",
+    "author": "cz",
+    "url": "https://i.pinimg.com/550x/c1/be/9f/c1be9f3a337e2cabc639dddc6f4b71e7.jpg",
+    "likes": 224
+}
