@@ -1,10 +1,9 @@
 const personsRouter = require('express').Router()
 const Person = require('../models/person')
 
-personsRouter.get('/', (req, res) => {
-    Person.find({}).then(persons => {
-        res.json(persons)
-    })
+personsRouter.get('/', async (req, res) => {
+  const persons = await Person.find({})
+  res.json(persons)
 })
 
 personsRouter.get('/:id', (request, response, next) => {
