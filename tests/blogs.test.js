@@ -66,10 +66,10 @@ describe('blogs tests',  () => {
 
     await api
      .post('/api/blogs')
-     .set('Authorization', `Bearer ${token}`)
      .send(newBlog)
      .expect(201)
      .expect('Content-Type', /application\/json/)
+     .set('Authorization', `Bearer ${token}`)
 
      const response = await api.get('/api/blogs')
      const blogs = response.body
