@@ -30,13 +30,9 @@ app.use(express.json())
 app.use(middleware.tokenExtractor)
 app.use(middleware.requestLogger)
 
-<<<<<<< HEAD
-app.use('/api/blogs', middleware.userExtractor, blogsRouter)
-app.use('/api/login', loginRouter)
-=======
+
 app.use('/api/login', loginRouter)
 app.use('/api/blogs', middleware.userExtractor, blogsRouter)
->>>>>>> ba95be0bf39f2592adb74e7b5215d83fda3d5058
 app.use('/users', usersRouter)
 app.use('/persons', personsRouter)
 

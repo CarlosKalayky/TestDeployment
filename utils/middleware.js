@@ -5,34 +5,6 @@ const User = require('../models/user')
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get('Authorization')
 
-  if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '')
-  } else {
-    return null
-  }
-}
-
-const userExtractor = async (request, response, next) => {
-  const token = tokenExtractor(request)
-  if (token) {
-    try {
-      const decodedToken = jwt.verify(token, process.env.SECRET)
-      const user = await User.findById(decodedToken.id)
-      request.user = user
-      next()
-    }catch (err) {
-      request.user = null
-      next()
-    }
-  } else {
-    request.user = null
-    next()
-  }
-}
-
-const tokenExtractor = (request, response, next) => {
-  const authorization = request.get('Authorization')
-
   if (authorization) {
     request.token = authorization.replace('Bearer ', '')
     console.log(request.token)
