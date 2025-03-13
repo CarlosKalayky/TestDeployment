@@ -28,7 +28,11 @@ const personSchema = new mongoose.Schema({
       message: 'Not a valid phone number'
     }
   },
-  id: Number
+  id: Number,
+  user : {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 personSchema.set('toJSON', {
