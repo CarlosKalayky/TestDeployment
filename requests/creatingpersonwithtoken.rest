@@ -1,6 +1,10 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
+<<<<<<< HEAD
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWQiOiI2N2QzMDdjNGQzNTZkYzA4YTNlNmQ1MjgiLCJpYXQiOjE3NDE4ODYwMTYsImV4cCI6MTc0MTg4OTYxNn0.oZO6_sUBmLgj-wZHXj7RwyDe04VPZNv4hAzO5qhuK6s
+=======
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWQiOiI2N2NiMWU3ZGE2MzA4ZmY2Njc5YjIyMjkiLCJpYXQiOjE3NDE3NzY3NjgsImV4cCI6MTc0MTc4MDM2OH0.tM78Cl7rYWwGDNazruOH856cQQ1mcKd8pyGa10cVVDM
+>>>>>>> ba95be0bf39f2592adb74e7b5215d83fda3d5058
 
 {
     "title": "newtesttokenextractor",
