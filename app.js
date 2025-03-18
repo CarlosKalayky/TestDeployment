@@ -24,6 +24,12 @@ mongoose.connect(config.MONGODB_URI)
   })
 
 app.use(express.static('dist'))
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:3001')
+//   res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type')
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+//   next()
+// })
 app.use(cors())
 app.use(express.json())
 // app.use(middleware.userExtractor)
