@@ -68,7 +68,7 @@ app.use(morgan(':type'))
 app.use(express.json())
 
 // Create a new person
-app.post('/api/persons', (request, response) => {
+app.post('/persons', (request, response) => {
   const body = request.body
 
   if (!body.name || !body.number) { // === undefined
@@ -98,7 +98,7 @@ app.post('/api/persons', (request, response) => {
 })
 
 //Changing number of a person
-app.put('/api/persons/:id', (request, response, next) => {
+app.put('/persons/:id', (request, response, next) => {
   const body = request.body
 
   const person = {
@@ -114,7 +114,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 })
 
 // Delete a person
-app.delete('/api/persons/:id', (request, response, next) => {
+app.delete('/persons/:id', (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
     .then(result => {
       console.log(result)
@@ -130,7 +130,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
 // })
 
 // Get one person from its id
-app.get('/api/persons/:id', (request, response, next) => {
+app.get('/persons/:id', (request, response, next) => {
   Person.findById(request.params.id)
   .then(person => {
     if(person){
@@ -154,7 +154,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 //   })
 
 // Get for all persons
-app.get('/api/persons', (request, response) => {
+app.get('/persons', (request, response) => {
   Person.find({}).then(persons => {
     console.log(persons)
     response.json(persons)
