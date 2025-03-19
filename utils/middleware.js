@@ -1,28 +1,33 @@
-const jwt = require('jsonwebtoken')
 const logger = require('./logger')
-const User = require('../models/user')
 
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get('Authorization')
 
-  if (authorization && authorization.startsWith('Bearer ')) {
+  if (authorization) {
     request.token = authorization.replace('Bearer ', '')
+    console.log(request.token)
+  } else {
+    request.token = null
   }
+
+  next()
 }
 
 const userExtractor = async (request, response, next) => {
   const token = request.token
+  if (token) {
     try {
       const decodedToken = jwt.verify(token, process.env.SECRET)
-      const user = await User.findById(decodedToken.id)
-      if(!user) {
-        return response.status(401).json({ error : 'user not found'})
-      }
-
-      request.user = user
+      request.user = decodedToken.id
+      next()
     }catch (err) {
       request.user = null
+      next()
     }
+  } else {
+    request.user = null
+    next()
+  }
 }
 
 const requestLogger = (request, response, next) => {

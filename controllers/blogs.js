@@ -41,23 +41,23 @@ blogsRouter.get('/:id', async (request, response, next) => {
     //     }
     //   })
     //   .catch(error => next(error))
-})
+  })
   
 blogsRouter.post('/', async (request, response, next) => {
     const body = request.body
-    const decodedToken = jwt.verify(request.token, process.env.SECRET)
-    if(!decodedToken.id) {
+    // const decodedToken = jwt.verify(request.token, process.env.SECRET)
+    if(!request.user.id) {
       return response.status(401).json({ error : 'token invalid'})
     }
 
-    const user = await User.findById(decodedToken.id)
+    const user = await User.findById(request.user.id)
   
     const blog = new Blog({
       title: body.title,
       author: body.author,
       url: body.url,
       likes: body.likes || 0,
-      user: user.id
+      user: user._id
     })
 
     try{

@@ -1,10 +1,8 @@
-POST http://localhost:3001/api/blogs
+POST http://localhost:3001/persons
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWQiOiI2N2QzMDdjNGQzNTZkYzA4YTNlNmQ1MjgiLCJpYXQiOjE3NDIyMzcxNDUsImV4cCI6MTc0MjI0MDc0NX0.ZxoegxSSdN_8vO4-GC6NaGLJvOwm3UwEysHoleTOqSM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWQiOiI2N2QzMDdjNGQzNTZkYzA4YTNlNmQ1MjgiLCJpYXQiOjE3NDI0MDY2MTksImV4cCI6MTc0MjQxMDIxOX0.hOvGnBq4BP2YZqZFCLCKCPpwou7ogZG106i7K8lLO2k
 
 {
-    "title": "newtesttokenextractor",
-    "author": "spiderman2",
-    "url" : "https://www.dth.com/-/media/Project/OneWeb/ComfortZone/Images/Blog/cats-get-along.jpg",
-    "likes" : 16
+    "name": "newpersontoken",
+    "number": "123-12345678"
 }

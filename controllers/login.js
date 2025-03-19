@@ -4,15 +4,9 @@ const loginRouter = require('express').Router()
 const User = require('../models/user')
 
 loginRouter.post('/', async (request, response) => {
-
-    try {
-
     const {username, password} = request.body
-    console.log('received info from username:', username)
 
     const user = await User.findOne({ username })
-    console.log('user found:', user)
-
     const passwordCorrect = user === null
     ? false : await bcrypt.compare(password, user.passwordHash)
 
@@ -35,10 +29,6 @@ loginRouter.post('/', async (request, response) => {
     response
         .status(200)
         .send({token, username:user.username, name:user.name})
-}catch{
-    response.status(401).json({
-        error: 'Invalid username or password'
-    })
-}})
+})
 
 module.exports = loginRouter

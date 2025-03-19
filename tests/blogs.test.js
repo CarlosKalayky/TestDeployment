@@ -70,6 +70,7 @@ describe('blogs tests',  () => {
      .send(newBlog)
      .expect(201)
      .expect('Content-Type', /application\/json/)
+
      const response = await api.get('/api/blogs')
      const blogs = response.body
     //  console.log(blogs)
