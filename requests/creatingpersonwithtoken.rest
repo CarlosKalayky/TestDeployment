@@ -1,8 +1,8 @@
 POST http://localhost:3001/persons
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWQiOiI2N2QzMDdjNGQzNTZkYzA4YTNlNmQ1MjgiLCJpYXQiOjE3NDI0MDY2MTksImV4cCI6MTc0MjQxMDIxOX0.hOvGnBq4BP2YZqZFCLCKCPpwou7ogZG106i7K8lLO2k
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN6MjI0IiwiaWQiOiI2N2RjMmIyYTQ2OTI1ZWJkMjZlMjQ0ZjAiLCJpYXQiOjE3NDI0ODI1MzgsImV4cCI6MTc0MjQ4NjEzOH0.i4xtUPj12TnatlQCAb08JRm2T2gGk95v7fnMRMpId2Y
 
 {
-    "name": "newpersontoken",
-    "number": "123-12345678"
+    "name": "onemoretest",
+    "number": "123-12335678"
 }
