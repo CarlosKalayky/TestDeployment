@@ -89,7 +89,7 @@ app.post('/persons', (request, response) => {
   })
 
   person.save().then(savedPerson => {
-    console.log(savedPerson)
+    // console.log(savedPerson)
     response.json(savedPerson)
   })
   // persons = persons.concat(person)
@@ -156,7 +156,7 @@ app.get('/persons/:id', (request, response, next) => {
 // Get for all persons
 app.get('/persons', (request, response) => {
   Person.find({}).then(persons => {
-    console.log(persons)
+    // console.log(persons)
     response.json(persons)
   })
 })
