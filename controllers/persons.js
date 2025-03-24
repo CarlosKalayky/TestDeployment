@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 const getTokenFrom = request => {
   const authorization = request.get('Authorization')
   if (authorization && authorization.startsWith('Bearer ')) {
+    console.log('authorization extracted')
     return authorization.replace('Bearer ', '')
   }
   return null
@@ -40,27 +41,33 @@ personsRouter.get('/:id', async (request, response, next) => {
   
 personsRouter.post('/', async (request, response, next) => {
     const body = request.body
-    const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
-    if(!decodedToken.id) {
-      return response.status(401).json({ error : 'token invalid'})
+    const token = getTokenFrom(request)
+    console.log('token', token)
+    if(!token) {
+      return response.status(401).json({ error : 'token missing'})
     }
-  
 
-    const user = await User.findById(decodedToken.id)
-  
-    const person = new Person({
-      name: body.name,
-      number: body.number,
-      user: user.id
-    })
-  
     try {
+      const decodedToken = jwt.verify(token, process.env.SECRET)
+      if(!decodedToken.id) {
+        return response.status(401).json({ error : 'token invalid'})
+      }
+
+      const user = await User.findById(decodedToken.id)
+  
+      const person = new Person({
+        name: body.name,
+        number: body.number,
+        user: user.id
+      })
+    
       const savedPerson = await person.save()
       user.persons = user.persons.concat(savedPerson._id)
       await user.save()
       response.status(201).json(savedPerson)
       } catch (error) {
-        next(error)
+          console.log("Error saving in the persons")
+          next(error)
       }
     // person.save()
     //   .then(savedPerson => {
