@@ -1,4 +1,5 @@
 const logger = require('./logger')
+const config = require('../utils/config')
 
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get('Authorization')
@@ -17,7 +18,7 @@ const userExtractor = async (request, response, next) => {
   const token = request.token
   if (token) {
     try {
-      const decodedToken = jwt.verify(token, process.env.SECRET)
+      const decodedToken = jwt.verify(token, config.SECRET)
       request.user = decodedToken.id
       next()
     }catch (err) {

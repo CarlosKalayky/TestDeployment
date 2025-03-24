@@ -2,6 +2,7 @@ const personsRouter = require('express').Router()
 const Person = require('../models/person')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
+const config = require('../utils/config')
 
 const getTokenFrom = request => {
   const authorization = request.get('Authorization')
@@ -48,7 +49,7 @@ personsRouter.post('/', async (request, response, next) => {
     }
 
     try {
-      const decodedToken = jwt.verify(token, process.env.SECRET)
+      const decodedToken = jwt.verify(token, config.SECRET)
       if(!decodedToken.id) {
         return response.status(401).json({ error : 'token invalid'})
       }
