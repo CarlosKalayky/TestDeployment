@@ -1,8 +1,8 @@
 const blogsRouter = require('express').Router()
-const { config } = require('dotenv')
+const jwt = require('jsonwebtoken')
+const config = require('../utils/config')
 const Blog = require('../models/blog')
 const User = require('../models/user')
-const jwt = require('jsonwebtoken')
 
 const getTokenFrom = request => {
   const authorization = request.get('Authorization')

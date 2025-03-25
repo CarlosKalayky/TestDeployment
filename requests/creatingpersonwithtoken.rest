@@ -1,8 +1,9 @@
-POST http://localhost:3001/persons
+POST https://testdeployment-yodj.onrender.com/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN6MjI0IiwiaWQiOiI2N2RjMmIyYTQ2OTI1ZWJkMjZlMjQ0ZjAiLCJpYXQiOjE3NDI0ODI1MzgsImV4cCI6MTc0MjQ4NjEzOH0.i4xtUPj12TnatlQCAb08JRm2T2gGk95v7fnMRMpId2Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN6MjI0IiwiaWQiOiI2N2RjMmIyYTQ2OTI1ZWJkMjZlMjQ0ZjAiLCJpYXQiOjE3NDI5MTY3NTEsImV4cCI6MTc0MjkyMDM1MX0.DCt8uJk2DP_9zwq8fUdDDoGjRWL5WjNdMaZ7ccITnFs
 
 {
-    "name": "onemoretest",
-    "number": "123-12335678"
+    "title": "test rest part5",
+    "author": "cz224",
+    "url" : "https://www.google.com"
 }
