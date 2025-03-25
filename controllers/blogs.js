@@ -5,7 +5,7 @@ const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
 const getTokenFrom = request => {
-  const authorization = request.get('authorization')
+  const authorization = request.get('Authorization')
   if (authorization && authorization.startsWith('Bearer ')) {
     return authorization.replace('Bearer ', '')
   }
@@ -14,7 +14,6 @@ const getTokenFrom = request => {
 
 blogsRouter.get('/', async (req, res) => {
   const blogs = await Blog.find({})
-    .find({})
     .populate('user', { username:1, name:1 })
   res.status(200).json(blogs)
     // Blog.find({}).then(blogs => {
@@ -87,7 +86,9 @@ blogsRouter.post('/', async (request, response, next) => {
 blogsRouter.delete('/:id', async (request, response, next) => {
     // const decodedToken = jwt.verify(request.token, process.env.SECRET)
 
-    const user = await User.findById(request.user.id)
+    const token = getTokenFrom(request)
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    const user = await User.findById(decodedToken.id)
     if (!user) {
       return response.status(401).json({ error: 'user not found' });
     }
